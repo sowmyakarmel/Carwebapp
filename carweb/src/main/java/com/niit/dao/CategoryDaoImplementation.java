@@ -21,6 +21,7 @@ public class CategoryDaoImplementation implements CategoryDao
 
 	@Autowired
 	SessionFactory sessionFactory;
+	
 	public boolean newCategory(Category category) {
 		// TOO Auto-generated method stub
 		System.out.println("Entered into new category");
@@ -63,7 +64,7 @@ public class CategoryDaoImplementation implements CategoryDao
 
 	}
 
-	public boolean updateCategory(Category category)
+	public boolean update(Category category)
 	{
 		//TODO Auto-generated method stub
 		try
@@ -77,8 +78,11 @@ public class CategoryDaoImplementation implements CategoryDao
 			System.out.println(e);
 			return false;
 		}
+		
 	}
 
+	
+	
 	public Category getCategory(int id)
 	{
 		//TODO Auto-generated method stub
@@ -95,15 +99,34 @@ public class CategoryDaoImplementation implements CategoryDao
 		}
 	}
 
+	@Override
+	public Map<Integer, String> getCatProduct() {
+		// TODO Auto-generated method stub
+		try {
+			List<Category> list=sessionFactory.getCurrentSession().createQuery("From Category",Category.class).getResultList();
+			Iterator<Category> it=list.iterator();
+			Map<Integer,String> map=new HashMap<>();
+			while(it.hasNext())
+			{
+			Category c=it.next();
+			map.put(c.getCategoryId(), c.getCategoryName());
+			 
+			}
+			return map;
+			} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+			return null;
+			
+		}
+	
+	}
+	
+
 	public List<Category>allCategories()
 	{
 		//TODO Auto-generated method stub
 		return sessionFactory.getCurrentSession().createQuery("From Category",Category.class).getResultList();
-	}
-
-	public boolean update(Category category) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 

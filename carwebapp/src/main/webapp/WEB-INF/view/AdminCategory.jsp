@@ -2,6 +2,10 @@
 
 <script type="text/javascript" src="${js}/categoryjs.js"></script>
 
+<div>
+<a href="newcat"><button class="btn btn-primary" > AddCategory</button></a>
+</div>
+
 <div class="container-fluid">
         <div class="row">
                 <div class="col-sm-1"></div>

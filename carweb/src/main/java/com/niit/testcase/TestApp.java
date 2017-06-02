@@ -23,24 +23,26 @@ public class TestApp {
 				ApplicationContextConfig.class);
 		// context.scan("com.niit");
 		// context.refresh();
-/*
-	RegisterDao regDao = (RegisterDao) context.getBean("regDao");
+
+	/*RegisterDao regDao = (RegisterDao) context.getBean("regDao");
 
 		CreateUser user = new CreateUser();
-		user.setEmail("sowmyakarmel@gmail.com");
-		user.setMyname("sowmya");
-		user.setContactno("9246150869");
-		user.setPassword("sowmya");
-		user.setRole("Customer");
+		user.setEmail("sowmyanarisetty@gmail.com");
+		user.setMyname("sowmya1@");
+		user.setContactno("8125141969");
+		user.setPassword("sowmyan");
+		user.setRole("ROLE_ADMIN");
 		user.setIs_active(true);
 		regDao.addData(user);
-*/
+		
+		*/
+
 
 
 	CategoryDao catDao= (CategoryDao) context.getBean("catDao");
 	
-	Category category=new Category();
-	/*category.setCategoryId(1);
+	/*Category category=new Category();
+	category.setCategoryId(1);
 	category.setCategoryName("Jaguar");
 	catDao.newCategory(category);
 	*/
@@ -54,9 +56,10 @@ public class TestApp {
 	product.setProductDescription("speed highest");
 	product.setProductDescription("Jaguar is a car");
 	product.setCategory(catDao.getCategory(1));
+	product.setProductPrice(100000);
 	product.setQuantity(1);
 	product.setStatus(true);
 	proDao.addProduct(product);
-	
-}
+	proDao.delete(35);
+	}
 }

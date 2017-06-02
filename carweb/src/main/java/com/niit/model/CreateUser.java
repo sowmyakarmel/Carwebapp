@@ -27,7 +27,7 @@ package com.niit.model;
 		@Column(unique=true)
 		@Pattern(regexp=".+@.+\\..+", message="Invalid email!")
 		private String email;
-		@Size(min=5, max=10, message="your name should be between 5-10 characters.")
+		@Size(min=5, max=100, message="your name should be between 5-10 characters.")
 		private String myname;
 		private boolean is_active;
 		
@@ -44,7 +44,7 @@ package com.niit.model;
 			this.email = email;
 		}
 		@NotNull(message="should not be empty")
-		@Length(min=5, max=10, message="Password should be between 5-10 characters")
+		@Length(min=5, max=100, message="Password should be between 5-10 characters")
 		private String password;
 		@Size(min=10, message="you cannot entered less than 10 digits.")
 		private String contactno;

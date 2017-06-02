@@ -31,7 +31,7 @@
       <li class="active"><a href="#">AdminHome</a></li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">AdminProduct <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">ManageProduct</a></li>
+          <li><a href="mngproduct">ManageProduct</a></li>
           
         </ul>
       </li>

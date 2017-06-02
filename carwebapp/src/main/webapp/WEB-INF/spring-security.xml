@@ -16,9 +16,9 @@
 		<intercept-url pattern="/**" access="permitAll" />
 		<form-login login-page="/login" default-target-url="/" 
 			authentication-failure-url="/login?error" username-parameter="email"  />
-		<logout logout-success-url="/home" logout-url="/admin/logout"
+		<logout logout-success-url="/" logout-url="/admin/logout"
 			delete-cookies="JSESSIONID" />
-			<logout logout-success-url="/home" logout-url="/customer/logout"/>
+			<logout logout-success-url="/" logout-url="/customer/logout"/>
 		<csrf disabled="true" />
 	</http>
 

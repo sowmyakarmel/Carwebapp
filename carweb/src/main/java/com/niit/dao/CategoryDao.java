@@ -9,10 +9,10 @@ public interface CategoryDao
 {
 
 	public boolean newCategory(Category category);
-	public Category getCategory(int id);
+	public Category getCategory(int id); 
 	public List<Category>allCategories();
 	public Map<Integer,String> getAllCat();
 	public boolean deleteCategory(int id);
 	public boolean update(Category category);
-	
+	public Map<Integer,String> getCatProduct();
 }

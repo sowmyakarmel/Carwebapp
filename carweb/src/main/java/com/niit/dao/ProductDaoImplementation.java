@@ -1,39 +1,55 @@
 package com.niit.dao;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
-import javax.persistence.Query;
-
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.niit.model.Category;
 import com.niit.model.Product;
 
 @Repository("proDao")
-@Transactional
+
 public class ProductDaoImplementation implements ProductDao
 {
 
-	@Autowired
+	
 	SessionFactory sessionFactory;
 	
 	
-	public boolean addProduct(Product product) {
+	@Autowired
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		   this.sessionFactory = sessionFactory;
+		}
+
+	public boolean addProduct(Product product)
+	{
+				
 		// TOO Auto-generated method stub
-		System.out.println("Entered into new product");
+		System.out.println("I am in add product Dao");
 		try {
-			Session s = sessionFactory.openSession();
-			Transaction t = s.beginTransaction();
-			s.save(product);
-			t.commit();
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			session.save(product);
+			tx.commit();
 			return true;
 		} catch (Exception e) {
 			// TODO:handle exception
-			System.out.println(e);
+			e.printStackTrace();
+			//System.out.println(e);
 			return false;
 		}
 	}
@@ -41,56 +57,44 @@ public class ProductDaoImplementation implements ProductDao
 	@SuppressWarnings("unchecked")
 	public List<Product> allProducts() {
 		// TODO Auto-generated method stub
-		return sessionFactory.getCurrentSession().createQuery("From Product").getResultList();
+		Session session= sessionFactory.openSession();
+		return session.createQuery("From Product").getResultList();
 	}
-	public Product getProduct(int id) {
+	public Product get (int id) {
 		// TODO Auto-generated method stub
-		System.out.println("Product");
-		try {
-			return sessionFactory.getCurrentSession().get(Product.class, Integer.valueOf(id));
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e);
-			return null;
-		}
+		Session session=sessionFactory.openSession();
+		Transaction tx=session.beginTransaction();
+		return session.get(Product.class, id);
 	}
 
-
-
-public List<Product> allProduct() {
-	// TODO Auto-generated method stub
-	return sessionFactory.getCurrentSession().createQuery("From Product", Product.class).getResultList();
-}
-
-
-public Product get(int id) {
-	Session session = sessionFactory.openSession();
-	Transaction tx = session.beginTransaction();
-	return session.get(Product.class, id);
-}
-
-public boolean update(Product product) {
+	public boolean update(Product product)
+	{
 	System.out.println("Product price::::::::::::::::::" + product.getProductPrice());
 	// TODO Auto-generated method stub
+	Session session=sessionFactory.openSession();
+	Transaction tx=session.beginTransaction();
 	try {
-		sessionFactory.getCurrentSession().update(product);
+		session.update(product);
+		tx.commit();
 		return true;
-	} catch (Exception e) {
+	}
+	catch (Exception e) {
 		System.out.println("Exception in ProductDao:::::::" + e);
 		return false;
 	}
 }
 
-@SuppressWarnings("deprecation")
-public boolean delete(int id) {
-	System.out.println("Testing");
+@SuppressWarnings({ "deprecation", "rawtypes"})
+public boolean delete (int id) {
+	System.out.println("i am in delete code");
+	Session session=sessionFactory.openSession();
+	Transaction tx=session.beginTransaction();
+	Query q;
 	try {
-		Query q = sessionFactory.getCurrentSession()
-				.createQuery("Update Product set quantity=:qan,status=:status WHERE productId=:ID");
+		 q = session.createQuery("DELETE Product WHERE productId= :ID");
 		q.setParameter("ID", id);
-		q.setParameter("qan", 0);
-		q.setParameter("status", false);
 		q.executeUpdate();
+		tx.commit();
 		return true;
 	} catch (Exception e) {
 		// TODO: handle exception
@@ -98,11 +102,13 @@ public boolean delete(int id) {
 		return false;
 	}
 }
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"deprecation","unchecked","rawtypes"})
 public List<Product> getCatProducts(Integer id) {
 	// TODO Auto-generated method stub
+	Session session= sessionFactory.openSession();
 	try {
-		Query q = sessionFactory.getCurrentSession().createQuery("From Product where category_id=:id");
+		Query q=session.createQuery("from Product where categoryid=:Id");
+
 		q.setParameter("id", id);
 		return q.getResultList();
 	} catch (Exception e) {
@@ -110,6 +116,13 @@ public List<Product> getCatProducts(Integer id) {
 		return null;
 	}
 }
+
+@Override
+public Product get(Integer id) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
 
 
 }

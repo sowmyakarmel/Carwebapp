@@ -24,20 +24,19 @@ public class Product implements Serializable
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int productId;
+	private Integer productId;
 	@NotNull
 	@Size(min=3, max=20,message="min 3 characters and max 20 characters")
 	private String productName;
 	@DecimalMin(value="0")
-	@DecimalMax(value="9999")
+	@DecimalMax(value="999999999")
 	@Digits(fraction=2,integer=5)
-	
 	private float productPrice;
 	@NotNull(message="should not live blank")
 	@Size(min=1,max=1000,message="The product price should not exceed 1000 ")
 	private String productDescription;
 	@DecimalMin(value="0")
-	@DecimalMax(value="999")
+	@DecimalMax(value="9999")
 	@NotNull(message="should not live blank")
 	private int quantity;
 	@Transient
@@ -94,5 +93,5 @@ public class Product implements Serializable
 		this.category = category;
 	}
 	
-	
 	}
+

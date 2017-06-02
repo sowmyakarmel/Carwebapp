@@ -8,12 +8,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.niit.dao.ProductDao;
 import com.niit.dao.RegisterDao;
 import com.niit.model.CreateUser;
+import com.niit.model.Product;
 
 @Controller
 public class HomeController 
@@ -35,7 +38,7 @@ public class HomeController
 			}
 			else
 			{
-				return new ModelAndView("customer");
+				return new ModelAndView("customerprodpage");
 			}
 		}
 		return new ModelAndView("index");
@@ -73,4 +76,7 @@ public class HomeController
 		return "loginform";
 	}
 	
+	
+	
+
 }
